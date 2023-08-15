@@ -3,6 +3,9 @@
 const addForm = document.querySelector('#addForm');
 const item = document.querySelector('#item');
 const itemsList = document.querySelector('#items');
+const search = document.querySelector('#filter');
+
+
 
 // Add items functionality.
 
@@ -15,12 +18,16 @@ function addItem(e) {
     item.value = "";
 }
 
-// managing items list operations.
+
+
+// Managing items list operations.
 
 itemsList.addEventListener('click', itemOperation);
 function itemOperation(e) {
     if(e.target.classList.contains('delete')) deleteItem(e.target.parentElement);
 }
+
+
 
 // Delete items functinality
 
@@ -28,6 +35,20 @@ function deleteItem(element) {
     const isConfirmed = confirm(`Are you sure you want to delete ${element.children[0].value}?`);
     if(isConfirmed) element.remove();
 }
+
+
+
+// Implmenting search functionality
+
+search.addEventListener('keyup', findItem)
+function findItem(e) {
+    const val = e.target.value.toLowerCase();
+    Array.from(itemsList.children).forEach(item => {
+        if(val === item.firstChild.textContent.slice(0, val.length).toLowerCase()) item.classList.remove('d-none');
+        else item.classList.add('d-none');
+    })
+}
+
 
 
 // Utility functions
@@ -38,10 +59,4 @@ function addElement(element, parent, textNode,  ...classes) {
     newElement.append(textNode);
     parent.append(newElement);
     return newElement;
-}
-
-document.querySelector('#filter').addEventListener('click', see);
-
-function see() {
-    Array.from(itemsList.children).forEach(x => console.log(x.firstChild.textContent));
 }
