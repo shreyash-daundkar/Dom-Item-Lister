@@ -1,7 +1,8 @@
 // Selecting element
 
 const addForm = document.querySelector('#addForm');
-const item = document.querySelector('#item');
+const itemName = document.querySelector('#item-name');
+const itemDes = document.querySelector('#item-des');
 const itemsList = document.querySelector('#items');
 const search = document.querySelector('#filter');
 
@@ -12,10 +13,12 @@ const search = document.querySelector('#filter');
 addForm.addEventListener('submit', addItem);
 function addItem(e) {
     e.preventDefault();
-    const listItem = addElement('li', itemsList, document.createTextNode(item.value), 'list-group-item');
+    const listItem = addElement('li', itemsList, document.createTextNode(itemName.value), 'list-group-item');
     const editBtn = addElement('button', listItem, document.createTextNode('Edit'), 'btn', 'btn-sm', 'float-right', 'btn-warning', 'ml-2', 'edit');
     const delBtn = addElement('button', listItem, document.createTextNode('X'), 'btn', 'btn-danger',  'btn-sm', 'float-right', 'delete');
-    item.value = "";
+    const des = addElement('small', listItem, document.createTextNode(itemDes.value), 'd-block', 'text-muted', 'mt-1');
+    itemName.value = '';
+    itemDes.value = '';
 }
 
 
