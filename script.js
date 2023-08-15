@@ -47,7 +47,9 @@ search.addEventListener('keyup', findItem)
 function findItem(e) {
     const val = e.target.value.toLowerCase();
     Array.from(itemsList.children).forEach(item => {
-        if(val === item.firstChild.textContent.slice(0, val.length).toLowerCase()) item.classList.remove('d-none');
+        const name = item.firstChild.textContent.slice(0, val.length).toLowerCase();
+        const des = item.lastElementChild.textContent.slice(0, val.length).toLowerCase();
+        if(val == name || val == des) item.classList.remove('d-none');
         else item.classList.add('d-none');
     })
 }
